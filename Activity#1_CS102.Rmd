@@ -1,0 +1,44 @@
+---
+title: "Activity#1_CS102"
+author: "Shun Holleza"
+date: "2024-01-23"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(polite)
+library(dplyr)
+library(rvest)
+library(httr)
+polite::use_manners(save_as = 'polite_scrape.R')
+```
+
+```{r}
+url_link <- 'https://www.amazon.com/s?k=laptop&crid=1FLJBWU1YV8IH&sprefix=lap%2Caps%2C279&ref=nb_sb_noss_2'
+session <- bow(url_link,
+               user_agent = "Educational")
+session
+```
+
+```{r}
+brand_description <- character(0)
+price <- character(0)
+No.Of_Reviews <- character (0)
+
+```
+
+```{r}
+page <- read_html(url_link)
+brand_description <- scrape(session) %>%
+  html_nodes('a-size-medium a-color-base a-text-normal') %>% 
+  html_text
+brand_description
+```
+
+```{r}
+class(brand_description)
+
+```
